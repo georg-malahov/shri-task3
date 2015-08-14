@@ -1,0 +1,15 @@
+{
+  "author": "Yuri Malakhov",
+  "name": "shri-task3",
+  "description": "Task 3 for Yandex frontend development school.",
+  "email": "79627272095@ya.ru",
+  "version": "0.1.0",
+  "ignore": [
+    ".enb/tmp",
+    "node_modules",
+    "libs"
+  ],
+  "dependencies": {
+    "bem-components": "v2.3.0"
+  }
+}
