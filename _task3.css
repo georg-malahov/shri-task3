@@ -23,7 +23,7 @@
   text-align: center;
   color: #f3f3f3;
   font-weight: 300;
-  background: url("../../desktop.blocks/header/background.png") #4276b6;
+  background: url("header-background.png") #4276b6;
   box-shadow: 1px 0px 2px rgba(0,0,0,0.75);
   -moz-box-sizing: border-box;
        box-sizing: border-box;
@@ -57,6 +57,12 @@
   height: 50px;
   background: #fc0;
   border: 1px solid #f0b500;
+}
+.banner .button {
+  position: relative;
+  float: right;
+  top: 10px;
+  margin-right: 2.5%;
 }
 /* ../../desktop.blocks/banner/banner.styl:end */
 /* ../../desktop.blocks/content/content.styl:begin */
@@ -178,7 +184,7 @@ html {
   font-weight: 400;
   margin: 0;
   padding: 0;
-  background: url("../../desktop.blocks/page/background.png") #eae6d1;
+  background: url("page-background.png") #eae6d1;
 }
 /* ../../desktop.blocks/page/page.styl:end */
 /* ../../libs/bem-components/design/common.blocks/button/_theme/button_theme_islands.styl:begin */
@@ -510,15 +516,16 @@ html {
 /* ../../libs/bem-components/design/common.blocks/progressbar/_theme/progressbar_theme_islands.styl:end */
 /* ../../common.blocks/player/__files-list/player__files-list.styl:begin */
 .player__files-list {
+  position: relative;
   float: right;
   min-width: 200px;
   padding: 5px;
+  padding-top: 10px;
 }
 .player__files-list .spin_visible {
+  position: absolute;
   left: 50%;
   margin-left: -14px;
-  top: 3px;
-  padding: 10px 0;
 }
 .player__files-list_loading .player__files-list-content {
   opacity: 0.5;
@@ -611,6 +618,7 @@ html {
   float: left;
   min-width: 600px;
   padding: 5px;
+  padding-top: 10px;
   -moz-box-sizing: border-box;
        box-sizing: border-box;
 }

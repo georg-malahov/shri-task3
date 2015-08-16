@@ -6556,160 +6556,6 @@ provide(
 });
 
 /* end: ../../libs/bem-core/common.blocks/i-bem/__dom/_init/i-bem__dom_init.js */
-/* begin: ../../common.blocks/dropbox/dropbox.js */
-modules.define('dropbox',
-	['i-bem__dom', 'jquery', 'player'],
-	function (provide, BEMDOM, $, Player) {
-		provide(BEMDOM.decl(this.name, {
-			onSetMod: {
-				'js': {
-					'inited': function () {
-						this.bindTo('dragover', this._onDragOver);
-						this.bindTo('dragenter', this._onDragEnter);
-						this.bindTo('dragleave', this._onDragLeave);
-						this.bindTo('drop', this._onDrag);
-					}
-				}
-			},
-			_onDragOver: function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-				this.setMod('dragover', true);
-				e.originalEvent.dataTransfer.dropEffect = 'copy';
-			},
-			_onDragEnter: function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-			},
-			_onDragLeave: function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-			},
-			_onDrag: function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-				this.setMod('dragover', false);
-				this._files = e.originalEvent.dataTransfer.files;
-				this.emit('drop');
-			},
-			getFiles: function () {
-				return this._files;
-			}
-		}));
-	}
-);
-/* end: ../../common.blocks/dropbox/dropbox.js */
-/* begin: ../../libs/bem-core/common.blocks/i-bem/_elem-instances/i-bem_elem-instances.js */
-/**
- * @module i-bem
- */
-
-modules.define(
-    'i-bem',
-    ['i-bem__internal', 'inherit'],
-    function(provide, INTERNAL, inherit, BEM) {
-
-var buildClass = INTERNAL.buildClass;
-
-/**
- * @class BEM
- * @augments BEM
- * @exports
- */
-provide(BEM.decl(null, /** @lends BEM */{
-
-    /**
-     * Declares elements and creates an elements class
-     * @protected
-     * @param {Object} decl Element description
-     * @param {String} decl.block Block name
-     * @param {String} decl.elem Element name
-     * @param {String} [decl.baseBlock] Name of the parent block
-     * @param {Array} [decl.baseMix] Mixed block names
-     * @param {String} [decl.modName] Modifier name
-     * @param {String|Array} [decl.modVal] Modifier value
-     * @param {Object} [props] Methods
-     * @param {Object} [staticProps] Static methods
-     * @returns {Function}
-     */
-    decl : function(decl, props, staticProps) {
-        var block;
-        if(decl.elem) {
-            typeof decl.block === 'undefined' && (decl.block = this._blockName);
-            block = this.__base(
-                {
-                    block : buildClass(decl.block, decl.elem),
-                    baseBlock : decl.baseBlock,
-                    baseMix : decl.baseMix,
-                    modName : decl.modName,
-                    modVal : decl.modVal
-                },
-                props,
-                staticProps);
-            block._blockName = decl.block;
-            block._elemName = decl.elem;
-        } else {
-            block = this.__base.apply(this, arguments);
-            block._elemName || (block._blockName = block._name);
-        }
-        return block;
-    },
-
-    /**
-     * Factory method for creating an instance of the element named
-     * @param {Object} desc Description
-     * @param {Object} [params] Instance parameters
-     * @returns {BEM}
-     */
-    create : function(desc, params) {
-        return desc.elem?
-            new BEM.blocks[buildClass(desc.block, desc.elem)](desc.mods, params) :
-            this.__base(desc, params);
-    },
-
-    /**
-     * Returns the name of the current instance
-     * @protected
-     * @param {Boolean} [shortName] return the short name of the current instance
-     * @returns {String}
-     */
-    getName : function(shortName) {
-        return shortName? (this._elemName || this._blockName) : this._name;
-    }
-}));
-
-});
-
-/* end: ../../libs/bem-core/common.blocks/i-bem/_elem-instances/i-bem_elem-instances.js */
-/* begin: ../../common.blocks/player-controls/__btn/player-controls__btn.js */
-modules.define('player-controls__btn',
-	['i-bem__dom', 'player__file'],
-	function (provide, BEMDOM, playerFile) {
-		provide(BEMDOM.decl(this.name, {
-			onSetMod: {
-				'js': {
-					'inited': function () {
-						var _self = this;
-						this.findBlockInside('button').bindTo('click', function () {
-							_self.toggleMod('state', 'pause', 'play', _self.hasMod('state', 'play'));
-						});
-					}
-				},
-				'state': {
-					'play': function () {
-						this.findBlockInside('button').setText('pause');
-						playerFile.resume();
-					},
-					'pause': function () {
-						this.findBlockInside('button').setText('play');
-						playerFile.suspend();
-					}
-				}
-			}
-		}));
-	}
-);
-/* end: ../../common.blocks/player-controls/__btn/player-controls__btn.js */
 /* begin: ../../libs/bem-components/common.blocks/button/button.js */
 /**
  * @module button
@@ -8742,6 +8588,160 @@ provide(Control.decl({
 });
 
 /* end: ../../libs/bem-components/desktop.blocks/control/control.js */
+/* begin: ../../common.blocks/dropbox/dropbox.js */
+modules.define('dropbox',
+	['i-bem__dom', 'jquery', 'player'],
+	function (provide, BEMDOM, $, Player) {
+		provide(BEMDOM.decl(this.name, {
+			onSetMod: {
+				'js': {
+					'inited': function () {
+						this.bindTo('dragover', this._onDragOver);
+						this.bindTo('dragenter', this._onDragEnter);
+						this.bindTo('dragleave', this._onDragLeave);
+						this.bindTo('drop', this._onDrag);
+					}
+				}
+			},
+			_onDragOver: function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+				this.setMod('dragover', true);
+				e.originalEvent.dataTransfer.dropEffect = 'copy';
+			},
+			_onDragEnter: function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+			},
+			_onDragLeave: function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+			},
+			_onDrag: function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+				this.setMod('dragover', false);
+				this._files = e.originalEvent.dataTransfer.files;
+				this.emit('drop');
+			},
+			getFiles: function () {
+				return this._files;
+			}
+		}));
+	}
+);
+/* end: ../../common.blocks/dropbox/dropbox.js */
+/* begin: ../../libs/bem-core/common.blocks/i-bem/_elem-instances/i-bem_elem-instances.js */
+/**
+ * @module i-bem
+ */
+
+modules.define(
+    'i-bem',
+    ['i-bem__internal', 'inherit'],
+    function(provide, INTERNAL, inherit, BEM) {
+
+var buildClass = INTERNAL.buildClass;
+
+/**
+ * @class BEM
+ * @augments BEM
+ * @exports
+ */
+provide(BEM.decl(null, /** @lends BEM */{
+
+    /**
+     * Declares elements and creates an elements class
+     * @protected
+     * @param {Object} decl Element description
+     * @param {String} decl.block Block name
+     * @param {String} decl.elem Element name
+     * @param {String} [decl.baseBlock] Name of the parent block
+     * @param {Array} [decl.baseMix] Mixed block names
+     * @param {String} [decl.modName] Modifier name
+     * @param {String|Array} [decl.modVal] Modifier value
+     * @param {Object} [props] Methods
+     * @param {Object} [staticProps] Static methods
+     * @returns {Function}
+     */
+    decl : function(decl, props, staticProps) {
+        var block;
+        if(decl.elem) {
+            typeof decl.block === 'undefined' && (decl.block = this._blockName);
+            block = this.__base(
+                {
+                    block : buildClass(decl.block, decl.elem),
+                    baseBlock : decl.baseBlock,
+                    baseMix : decl.baseMix,
+                    modName : decl.modName,
+                    modVal : decl.modVal
+                },
+                props,
+                staticProps);
+            block._blockName = decl.block;
+            block._elemName = decl.elem;
+        } else {
+            block = this.__base.apply(this, arguments);
+            block._elemName || (block._blockName = block._name);
+        }
+        return block;
+    },
+
+    /**
+     * Factory method for creating an instance of the element named
+     * @param {Object} desc Description
+     * @param {Object} [params] Instance parameters
+     * @returns {BEM}
+     */
+    create : function(desc, params) {
+        return desc.elem?
+            new BEM.blocks[buildClass(desc.block, desc.elem)](desc.mods, params) :
+            this.__base(desc, params);
+    },
+
+    /**
+     * Returns the name of the current instance
+     * @protected
+     * @param {Boolean} [shortName] return the short name of the current instance
+     * @returns {String}
+     */
+    getName : function(shortName) {
+        return shortName? (this._elemName || this._blockName) : this._name;
+    }
+}));
+
+});
+
+/* end: ../../libs/bem-core/common.blocks/i-bem/_elem-instances/i-bem_elem-instances.js */
+/* begin: ../../common.blocks/player-controls/__btn/player-controls__btn.js */
+modules.define('player-controls__btn',
+	['i-bem__dom', 'player__file'],
+	function (provide, BEMDOM, playerFile) {
+		provide(BEMDOM.decl(this.name, {
+			onSetMod: {
+				'js': {
+					'inited': function () {
+						var _self = this;
+						this.findBlockInside('button').bindTo('click', function () {
+							_self.toggleMod('state', 'pause', 'play', _self.hasMod('state', 'play'));
+						});
+					}
+				},
+				'state': {
+					'play': function () {
+						this.findBlockInside('button').setText('pause');
+						playerFile.resume();
+					},
+					'pause': function () {
+						this.findBlockInside('button').setText('play');
+						playerFile.suspend();
+					}
+				}
+			}
+		}));
+	}
+);
+/* end: ../../common.blocks/player-controls/__btn/player-controls__btn.js */
 /* begin: ../../common.blocks/button/_file/button_file.js */
 modules.define('button',
 	['jquery'],
@@ -8816,6 +8816,8 @@ modules.define('player__file',
 								name = fileElm.data('name'),
 								buffer = __self.getSourceBufferByName(name);
 
+							__self.stop();
+
 							__self._name = name;
 							__self.setSource(buffer);
 
@@ -8865,24 +8867,38 @@ modules.define('player__file',
 				this._source.connect(this._context.destination);
 				return this._source;
 			},
-			play: function () {
-				if (!this._context) { return; }
-				this._source.start(0);
+			play: function (startTime) {
+				if (!this._context || this._isPlaying) { return; }
+				this._isPlaying = true;
+				this._currentTime = startTime || 0;
+				this._source.start(this._currentTime);
 				this._startTick();
 			},
 			stop: function () {
-				if (!this._context) { return; }
+				if (!this._context || !this._isPlaying) { return; }
+				this._isPlaying = false;
 				this._source.stop();
 				this._stopTick();
 			},
 			suspend: function () {
-				if (!this._context) { return; }
-				this._context.suspend();
+				if (!this._context || !this._isPlaying) { return; }
+				if (typeof this._context.suspend == 'function') {
+					this._context.suspend();
+				} else {
+					this._source.stop();
+				}
+				this._isPlaying = false;
 				this._stopTick();
 			},
 			resume: function () {
-				if (!this._context) { return; }
-				this._context.resume();
+				if (!this._context || this._isPlaying) { return; }
+				if (typeof this._context.resume == 'function') {
+					this._context.resume();
+				} else {
+					this.setSource(this._source.buffer);
+					this.play(this._currentTime);
+				}
+				this._isPlaying = true;
 				this._startTick();
 			},
 			_startTick: function () {
@@ -8896,6 +8912,7 @@ modules.define('player__file',
 			},
 			_onTick: function () {
 				if (!this._context) { return; }
+				this._currentTime = this._context.currentTime;
 				if (progressbarBlock) {
 					progressbarBlock.setVal(this._context.currentTime / this._source.buffer.duration * 100);
 				}
@@ -9120,6 +9137,69 @@ provide($);
 });
 
 /* end: ../../libs/bem-core/common.blocks/jquery/__event/_type/jquery__event_type_pointerpressrelease.js */
+/* begin: ../../libs/bem-components/common.blocks/button/_type/button_type_link.js */
+/**
+ * @module button
+ */
+
+modules.define('button', function(provide, Button) {
+
+/**
+ * @exports
+ * @class button
+ * @bem
+ */
+provide(Button.decl({ modName : 'type', modVal : 'link' }, /** @lends button.prototype */{
+    onSetMod : {
+        'js' : {
+            'inited' : function() {
+                this.__base.apply(this, arguments);
+                this._url = this.params.url || this.domElem.attr('href');
+
+                this.hasMod('disabled') && this.domElem.removeAttr('href');
+            }
+        },
+
+        'disabled' : {
+            'true' : function() {
+                this.__base.apply(this, arguments);
+                this.domElem.removeAttr('href');
+            },
+
+            '' : function() {
+                this.__base.apply(this, arguments);
+                this.domElem.attr('href', this._url);
+            }
+        }
+    },
+
+    /**
+     * Returns url
+     * @returns {String}
+     */
+    getUrl : function() {
+        return this._url;
+    },
+
+    /**
+     * Sets url
+     * @param {String} url
+     * @returns {button} this
+     */
+    setUrl : function(url) {
+        this._url = url;
+        this.hasMod('disabled') || this.domElem.attr('href', url);
+        return this;
+    },
+
+    _doAction : function() {
+        this._url && (document.location = this._url);
+    }
+}));
+
+});
+
+/* end: ../../libs/bem-components/common.blocks/button/_type/button_type_link.js */
 /* begin: ../../libs/bem-core/common.blocks/i-bem/__dom/_elem-instances/i-bem__dom_elem-instances.js */
 /**
  * @module i-bem__dom
@@ -9563,6 +9643,7 @@ modules.define('player',
 				return this.createContext();
 			},
 			closeContext: function () {
+				if (typeof this._context.close !== 'function') { return; }
 				this._context.close();
 			},
 			updateContext: function () {
