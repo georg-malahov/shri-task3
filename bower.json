@@ -11,5 +11,8 @@
   ],
   "dependencies": {
     "bem-components": "v2.3.0"
+  },
+  "resolutions": {
+    "bem-core": "2.7.0"
   }
 }

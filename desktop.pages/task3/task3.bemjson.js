@@ -3,10 +3,10 @@ module.exports = {
 	block: 'page',
 	title: 'WebAudio API плеер',
 	styles: [
-			{ elem: 'css', url: 'task2.css' }
+			{ elem: 'css', url: 'task3.css' }
 	],
 	scripts: [
-			{ elem: 'js', url: 'task2.js' }
+			{ elem: 'js', url: 'task3.js' }
 	],
 	content: [
 		{
@@ -33,7 +33,8 @@ module.exports = {
 			content: [
 				{
 					block: 'player',
-					content: 'Player будет тут.'
+					mods: { 'state': 'empty' },
+					js: true
 				}
 			]
 		}

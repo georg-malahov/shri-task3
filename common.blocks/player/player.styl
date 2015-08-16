@@ -1,0 +1,32 @@
+.player
+	display         flex
+	flex-direction  row
+	flex-wrap       wrap
+	align-items     stretch
+	align-content   stretch
+	min-height      65vh
+	//border          1px solid #CBCBCB
+	box-sizing      border-box
+
+	&__content
+		flex        3 2 100px
+		float       left
+		min-width   600px
+		padding     5px
+		box-sizing  border-box
+
+	&__progress
+		.progressbar__bar
+			height      5px
+	&__visualization
+		display       block
+		padding-top:  5px
+		&-canvas
+			width:      100%;
+			height:     100%;
+
+	&__files-list
+		flex              1 1 100px
+		float             right
+		min-width         300px
+		overflow-y        auto
