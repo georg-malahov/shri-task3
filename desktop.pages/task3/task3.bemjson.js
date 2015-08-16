@@ -23,8 +23,7 @@ module.exports = {
 					content: 'Тестовое задание №3 для поступления в Школу разработчкив интерфейсов в Москве.'
 				},
 				{
-					block: 'banner',
-					mods: { 'github': true }
+					block: 'banner'
 				}
 			]
 		},

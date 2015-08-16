@@ -35,6 +35,7 @@ modules.define('player',
 				return this.createContext();
 			},
 			closeContext: function () {
+				if (typeof this._context.close !== 'function') { return; }
 				this._context.close();
 			},
 			updateContext: function () {

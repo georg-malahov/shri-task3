@@ -20,6 +20,8 @@ modules.define('player__file',
 								name = fileElm.data('name'),
 								buffer = __self.getSourceBufferByName(name);
 
+							__self.stop();
+
 							__self._name = name;
 							__self.setSource(buffer);
 
@@ -69,24 +71,38 @@ modules.define('player__file',
 				this._source.connect(this._context.destination);
 				return this._source;
 			},
-			play: function () {
-				if (!this._context) { return; }
-				this._source.start(0);
+			play: function (startTime) {
+				if (!this._context || this._isPlaying) { return; }
+				this._isPlaying = true;
+				this._currentTime = startTime || 0;
+				this._source.start(this._currentTime);
 				this._startTick();
 			},
 			stop: function () {
-				if (!this._context) { return; }
+				if (!this._context || !this._isPlaying) { return; }
+				this._isPlaying = false;
 				this._source.stop();
 				this._stopTick();
 			},
 			suspend: function () {
-				if (!this._context) { return; }
-				this._context.suspend();
+				if (!this._context || !this._isPlaying) { return; }
+				if (typeof this._context.suspend == 'function') {
+					this._context.suspend();
+				} else {
+					this._source.stop();
+				}
+				this._isPlaying = false;
 				this._stopTick();
 			},
 			resume: function () {
-				if (!this._context) { return; }
-				this._context.resume();
+				if (!this._context || this._isPlaying) { return; }
+				if (typeof this._context.resume == 'function') {
+					this._context.resume();
+				} else {
+					this.setSource(this._source.buffer);
+					this.play(this._currentTime);
+				}
+				this._isPlaying = true;
 				this._startTick();
 			},
 			_startTick: function () {
@@ -100,6 +116,7 @@ modules.define('player__file',
 			},
 			_onTick: function () {
 				if (!this._context) { return; }
+				this._currentTime = this._context.currentTime;
 				if (progressbarBlock) {
 					progressbarBlock.setVal(this._context.currentTime / this._source.buffer.duration * 100);
 				}

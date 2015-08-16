@@ -1,15 +1,16 @@
 ctx = '.player__files-list'
 {ctx}
+	position          relative
 	float             right
 	min-width         200px
 	padding           5px
+	padding-top       10px
 
 	.spin
 		&_visible
+			position      absolute
 			left:         50%;
 			margin-left:  -14px;
-			top:          3px;
-			padding:      10px 0;
 
 	&_loading
 		{ctx}-content
