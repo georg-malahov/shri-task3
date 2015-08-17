@@ -8923,7 +8923,7 @@ modules.define('player__file',
 						timing: '-' + __self.getDurationMin(this._source.buffer.duration - this._context.currentTime)
 					});
 				}
-				if (this._source.buffer.duration - this._context.currentTime == 0) {
+				if (this._source.buffer.duration - this._context.currentTime <= 0) {
 					var nextTrack = $('.player__file_active').next();
 					if (!nextTrack.length) {
 						this._stopTick();
