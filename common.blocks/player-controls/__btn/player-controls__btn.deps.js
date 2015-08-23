@@ -1,5 +1,8 @@
 ({
-	shouldDeps: [
-		{ elem: 'btn', mod: 'visible' }
-	]
+    shouldDeps: [
+        {
+            elem: 'btn',
+            mod: 'visible'
+        }
+    ]
 })
