@@ -1514,16 +1514,20 @@ bh.setOptions({
 // end: ../../libs/bem-core/common.blocks/ua/ua.bh.js
 // begin: ../../common.blocks/player-controls/__btn/player-controls__btn.bh.js
 
-	bh.match('player-controls__btn', function (ctx) {
-		ctx.mix([{ block: 'i-bem' }]).js(true, true).mods({state: 'pause'}).content({
-			cls: 'player-controls__btn-inner',
-			content: {
-				block: 'button',
-				mods: { theme: 'islands', size : 'm', view : 'action' },
-				text: 'play'
-			}
-		}, true);
-	});
+    bh.match('player-controls__btn', function (ctx) {
+        ctx.mix([{block: 'i-bem'}]).js(true, true).mods({state: 'pause'}).content({
+            cls: 'player-controls__btn-inner',
+            content: {
+                block: 'button',
+                mods: {
+                    theme: 'islands',
+                    size: 'm',
+                    view: 'action'
+                },
+                text: 'play'
+            }
+        }, true);
+    });
 
 // end: ../../common.blocks/player-controls/__btn/player-controls__btn.bh.js
 // begin: ../../libs/bem-components/common.blocks/icon/icon.bh.js
@@ -1593,76 +1597,91 @@ bh.setOptions({
 // end: ../../libs/bem-components/common.blocks/button/__text/button__text.bh.js
 // begin: ../../common.blocks/button/_file/button_file.bh.js
 
-	bh.match('button_file', function (ctx) {
-		var content = [];
-		content.push(ctx.content());
-		if (ctx.param('icon') != null) {
-			content.push(ctx.param('text'));
-		}
-		if (ctx.param('text') != null) {
-			content.push({
-				elem: 'text',
-				content: ctx.param('text')
-			});
-		}
-		content.push({
-			tag: 'input',
-			attrs: { type: 'file', multiple: 'multiple' }
-		});
-		ctx.tag('label').content(content, true);
-	});
+    bh.match('button_file', function (ctx) {
+        var content = [];
+
+        content.push(ctx.content());
+
+        if (ctx.param('icon') != null) {
+            content.push(ctx.param('text'));
+        }
+
+        if (ctx.param('text') != null) {
+            content.push({
+                elem: 'text',
+                content: ctx.param('text')
+            });
+        }
+
+        content.push({
+            tag: 'input',
+            attrs: {
+                type: 'file',
+                multiple: 'multiple'
+            }
+        });
+
+        ctx.tag('label').content(content, true);
+    });
 
 // end: ../../common.blocks/button/_file/button_file.bh.js
 // begin: ../../common.blocks/player-controls/__open/player-controls__open.bh.js
 
-	bh.match('player-controls__open', function (ctx) {
-		ctx.content({
-			block: 'button',
-			mods: { theme: 'islands', size: 'm', view: 'action', file: true },
-			text: 'Select tracks'
-		}, true);
-	});
+    bh.match('player-controls__open', function (ctx) {
+        ctx.content({
+            block: 'button',
+            mods: {
+                theme: 'islands',
+                size: 'm',
+                view: 'action',
+                file: true
+            },
+            text: 'Select tracks'
+        }, true);
+    });
 
 // end: ../../common.blocks/player-controls/__open/player-controls__open.bh.js
 // begin: ../../common.blocks/player/__progress/player__progress.bh.js
 
-	bh.match('player__progress', function (ctx) {
-		ctx.content({
-			block : 'progressbar',
-			mods : { theme : 'islands' },
-			val : 0
-		}, true)
-	});
+    bh.match('player__progress', function (ctx) {
+        ctx.content({
+            block: 'progressbar',
+            mods: {theme: 'islands'},
+            val: 0
+        }, true)
+    });
 
 // end: ../../common.blocks/player/__progress/player__progress.bh.js
 // begin: ../../common.blocks/player/__visualization/player__visualization.bh.js
 
-	bh.match('player__visualization', function (ctx) {
-		ctx.content({
-			tag: 'canvas',
-			cls: 'player__visualization-canvas'
-		}, true);
-	});
+    bh.match('player__visualization', function (ctx) {
+        ctx.content({
+            tag: 'canvas',
+            cls: 'player__visualization-canvas'
+        }, true);
+    });
 
 // end: ../../common.blocks/player/__visualization/player__visualization.bh.js
 // begin: ../../common.blocks/player/__file/player__file.bh.js
 
-	bh.match('player__file', function (ctx) {
-		var info = ctx.param('js').info;
-		if (!info) {
-			return ctx.content('file');
-		}
-		ctx.attrs({ 'data-name': info.name }).content([
-			{
-				cls: 'player__file-name',
-				content: info.name
-			},
-			{
-				cls: 'player__file-duration',
-				content: info.duration
-			}
-		], true);
-	});
+    bh.match('player__file', function (ctx) {
+        var info = ctx.param('js').info;
+
+        if (!info) {
+            return ctx.content('file');
+        }
+
+        ctx.attrs({'data-name': info.name}).content([
+            {
+                cls: 'player__file-name',
+                content: info.name
+            },
+            {
+                cls: 'player__file-duration',
+                content: info.duration
+            }
+        ], true);
+    });
 
 // end: ../../common.blocks/player/__file/player__file.bh.js
 // begin: ../../libs/bem-components/common.blocks/spin/spin.bh.js
@@ -1689,112 +1708,124 @@ bh.setOptions({
 // end: ../../libs/bem-components/common.blocks/progressbar/progressbar.bh.js
 // begin: ../../common.blocks/player-controls/__track/player-controls__track.bh.js
 
-	bh.match('player-controls__track', function (ctx) {
-		var info = ctx.param('info'),
-			content = [];
+    bh.match('player-controls__track', function (ctx) {
+        var info = ctx.param('info'),
+            content = [];
 
-		if (!info) {
-			content.push({
-				cls: 'player-controls__track-name',
-				content: 'Nothing is playing'
-			});
-			return ctx.content(content, true);
-		}
+        if (!info) {
+            content.push({
+                cls: 'player-controls__track-name',
+                content: 'Nothing is playing'
+            });
+            return ctx.content(content, true);
+        }
 
-		content.push({
-			cls: 'player-controls__track-name',
-			content: info.name
-		});
+        content.push({
+            cls: 'player-controls__track-name',
+            content: info.name
+        });
 
-		if (info.timing) {
-			content.push(
-				{
-					cls: 'player-controls__track-timing',
-					content: info.timing
-				}
-			);
-		}
-		ctx.content(content, true);
-	});
+        if (info.timing) {
+            content.push(
+                {
+                    cls: 'player-controls__track-timing',
+                    content: info.timing
+                }
+            );
+        }
+        ctx.content(content, true);
+    });
 
 // end: ../../common.blocks/player-controls/__track/player-controls__track.bh.js
 // begin: ../../common.blocks/player/__files-list/player__files-list.bh.js
 
-	bh.match('player__files-list', function (ctx) {
-		var content = {
-			cls: 'player__files-list-inner',
-			content: [
-				{
-					cls: 'player__files-list-header',
-					content: 'Playlist'
-				},
-				{
-					block : 'spin',
-					mods : { theme : 'islands', size : 'm', visible : false }
-				},
-				{
-					cls: 'player__files-list-content',
-					content: ctx.content() || 'No tracks.'
-				}
-			]
-		};
-		ctx.mix([{block: 'i-bem'}]).js(true, true).content(content, true);
-	});
+    bh.match('player__files-list', function (ctx) {
+        var content = {
+            cls: 'player__files-list-inner',
+            content: [
+                {
+                    cls: 'player__files-list-header',
+                    content: 'Playlist'
+                },
+                {
+                    block: 'spin',
+                    mods: {
+                        theme: 'islands',
+                        size: 'm',
+                        visible: false
+                    }
+                },
+                {
+                    cls: 'player__files-list-content',
+                    content: ctx.content() || 'No tracks.'
+                }
+            ]
+        };
+        ctx.mix([{block: 'i-bem'}]).js(true, true).content(content, true);
+    });
 
 // end: ../../common.blocks/player/__files-list/player__files-list.bh.js
 // begin: ../../common.blocks/player-controls/player-controls.bh.js
 
-	bh.match('player-controls', function (ctx) {
-		ctx.content([
-			{ elem: 'open' },
-			{ elem: 'track', content: 'Drag and drop audio files to the player.' },
-			{ elem: 'btn' },
-			//{ elem: 'equalizer' }
-		], true);
-	});
+    bh.match('player-controls', function (ctx) {
+        ctx.content([
+            {elem: 'open'},
+            {
+                elem: 'track',
+                content: 'Drag and drop audio files to the player.'
+            },
+            {elem: 'btn'},
+            //{ elem: 'equalizer' }
+        ], true);
+    });
 
 // end: ../../common.blocks/player-controls/player-controls.bh.js
 // begin: ../../common.blocks/player/__controls/player__controls.bh.js
 
-	bh.match('player__controls', function (ctx) {
-		ctx.content({
-			block: 'player-controls',
-			js: true
-		}, true);
-	});
+    bh.match('player__controls', function (ctx) {
+        ctx.content({
+            block: 'player-controls',
+            js: true
+        }, true);
+    });
 
 // end: ../../common.blocks/player/__controls/player__controls.bh.js
 // begin: ../../common.blocks/player/player.bh.js
 
-	bh.match('player', function (ctx) {
-		ctx.mix([{ block: 'clearfix' }, { block: 'dropbox', js: true }]).content([
-			{
-				cls: 'player__content',
-				content: [
-					{
-						block: 'player',
-						elem: 'controls',
-						mix: [{block: 'i-bem'}],
-						js: true
-					},
-					{
-						block: 'player',
-						elem: 'progress',
-						mix: [{block: 'i-bem'}],
-					},
-					{
-						block: 'player',
-						elem: 'visualization',
-						mix: [{block: 'i-bem'}],
-					}
-				]
-			},
-			{
-				block: 'player',
-				elem: 'files-list'
-			}
-		], true);
-	});
+    bh.match('player', function (ctx) {
+        ctx.mix([{block: 'clearfix'},
+            {
+                block: 'dropbox',
+                js: true
+            }
+        ]).content([
+            {
+                cls: 'player__content',
+                content: [
+                    {
+                        block: 'player',
+                        elem: 'controls',
+                        mix: [{block: 'i-bem'}],
+                        js: true
+                    },
+                    {
+                        block: 'player',
+                        elem: 'progress',
+                        mix: [{block: 'i-bem'}],
+                    },
+                    {
+                        block: 'player',
+                        elem: 'visualization',
+                        mix: [{block: 'i-bem'}],
+                    }
+                ]
+            },
+            {
+                block: 'player',
+                elem: 'files-list'
+            }
+        ], true);
+    });
 
 // end: ../../common.blocks/player/player.bh.js
 provide(bh);
@@ -8590,46 +8621,52 @@ provide(Control.decl({
 /* end: ../../libs/bem-components/desktop.blocks/control/control.js */
 /* begin: ../../common.blocks/dropbox/dropbox.js */
 modules.define('dropbox',
-	['i-bem__dom', 'jquery', 'player'],
-	function (provide, BEMDOM, $, Player) {
-		provide(BEMDOM.decl(this.name, {
-			onSetMod: {
-				'js': {
-					'inited': function () {
-						this.bindTo('dragover', this._onDragOver);
-						this.bindTo('dragenter', this._onDragEnter);
-						this.bindTo('dragleave', this._onDragLeave);
-						this.bindTo('drop', this._onDrag);
-					}
-				}
-			},
-			_onDragOver: function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-				this.setMod('dragover', true);
-				e.originalEvent.dataTransfer.dropEffect = 'copy';
-			},
-			_onDragEnter: function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-			},
-			_onDragLeave: function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-			},
-			_onDrag: function (e) {
-				e.stopPropagation();
-				e.preventDefault();
-				this.setMod('dragover', false);
-				this._files = e.originalEvent.dataTransfer.files;
-				this.emit('drop');
-			},
-			getFiles: function () {
-				return this._files;
-			}
-		}));
-	}
+    ['i-bem__dom'],
+    function (provide, BEMDOM) {
+        provide(BEMDOM.decl(this.name, {
+            onSetMod: {
+                'js': {
+                    'inited': function () {
+                        this.bindTo('dragover', this._onDragOver);
+                        this.bindTo('dragenter', this._onDragEnter);
+                        this.bindTo('dragleave', this._onDragLeave);
+                        this.bindTo('drop', this._onDrag);
+                    }
+                }
+            },
+            _onDragOver: function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+
+                this.setMod('dragover', true);
+
+                e.originalEvent.dataTransfer.dropEffect = 'copy';
+            },
+            _onDragEnter: function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            },
+            _onDragLeave: function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            },
+            _onDrag: function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+
+                this.setMod('dragover', false);
+
+                this._files = e.originalEvent.dataTransfer.files;
+
+                this.emit('drop');
+            },
+            getFiles: function () {
+                return this._files;
+            }
+        }));
+    }
 );
+
 /* end: ../../common.blocks/dropbox/dropbox.js */
 /* begin: ../../libs/bem-core/common.blocks/i-bem/_elem-instances/i-bem_elem-instances.js */
 /**
@@ -8715,251 +8752,292 @@ provide(BEM.decl(null, /** @lends BEM */{
 /* end: ../../libs/bem-core/common.blocks/i-bem/_elem-instances/i-bem_elem-instances.js */
 /* begin: ../../common.blocks/player-controls/__btn/player-controls__btn.js */
 modules.define('player-controls__btn',
-	['i-bem__dom', 'player__file'],
-	function (provide, BEMDOM, playerFile) {
-		provide(BEMDOM.decl(this.name, {
-			onSetMod: {
-				'js': {
-					'inited': function () {
-						var _self = this;
-						this.findBlockInside('button').bindTo('click', function () {
-							_self.toggleMod('state', 'pause', 'play', _self.hasMod('state', 'play'));
-						});
-					}
-				},
-				'state': {
-					'play': function () {
-						this.findBlockInside('button').setText('pause');
-						playerFile.resume();
-					},
-					'pause': function () {
-						this.findBlockInside('button').setText('play');
-						playerFile.suspend();
-					}
-				}
-			}
-		}));
-	}
+    ['i-bem__dom', 'player__file'],
+    function (provide, BEMDOM, playerFile) {
+        provide(BEMDOM.decl(this.name, {
+            onSetMod: {
+                'js': {
+                    'inited': function () {
+                        var _self = this;
+
+                        this.findBlockInside('button').bindTo('click', function () {
+                            _self.toggleMod('state', 'pause', 'play', _self.hasMod('state', 'play'));
+                        });
+                    }
+                },
+                'state': {
+                    'play': function () {
+                        this.findBlockInside('button').setText('pause');
+                        playerFile.resume();
+                    },
+                    'pause': function () {
+                        this.findBlockInside('button').setText('play');
+                        playerFile.suspend();
+                    }
+                }
+            }
+        }));
+    }
 );
+
 /* end: ../../common.blocks/player-controls/__btn/player-controls__btn.js */
 /* begin: ../../common.blocks/button/_file/button_file.js */
 modules.define('button',
-	['jquery'],
-	function (provide, $, Button) {
-		provide(Button.decl({ modName : 'file' }, {
-			onSetMod: {
-				'js': {
-					'inited': function () {
-						this.__base.apply(this, arguments);
+    ['jquery'],
+    function (provide, $, Button) {
+        provide(Button.decl({modName: 'file'}, {
+            onSetMod: {
+                'js': {
+                    'inited': function () {
+                        this.__base.apply(this, arguments);
 
-						var _self = this,
-							input = $(this.domElem).find('input');
+                        var _self = this,
+                            input = $(this.domElem).find('input');
 
-						input.change(function () {
-							if (!input[0].files) {
-								console.warn("This browser doesn't seem to support the `files` property of file inputs.");
-							}
+                        input.change(function () {
+                            if (!input[0].files) {
+                                console.warn("This browser doesn't seem to support the `files` property of file inputs.");
+                            }
 
-							var files = input[0].files,
-								fileNames = [],
-								i;
+                            var files = input[0].files,
+                                fileNames = [],
+                                i;
 
-							for (i = 0; i < files.length; i++) {
-								fileNames.push(files[i].name);
-							}
+                            for (i = 0; i < files.length; i++) {
+                                fileNames.push(files[i].name);
+                            }
 
-							_self._files = files;
-							_self._fileNames = fileNames;
-							_self.emit('change');
-						});
-					}
-				}
-			},
-			/**
-			 * Return selected files.
-			 * @returns {*|files}
-			 */
-			getFiles: function () {
-				return this._files;
-			},
-			/**
-			 * Return selected file names.
-			 * @returns {Array|*|fileNames}
-			 */
-			getFileNames: function () {
-				return this._fileNames;
-			}
-		}));
-	}
+                            _self._files = files;
+                            _self._fileNames = fileNames;
+                            _self.emit('change');
+                        });
+                    }
+                }
+            },
+            /**
+             * Return selected files.
+             * @returns {*|files}
+             */
+            getFiles: function () {
+                return this._files;
+            },
+            /**
+             * Return selected file names.
+             * @returns {Array|*|fileNames}
+             */
+            getFileNames: function () {
+                return this._fileNames;
+            }
+        }));
+    }
 );
+
 /* end: ../../common.blocks/button/_file/button_file.js */
 /* begin: ../../common.blocks/player/__file/player__file.js */
 modules.define('player__file',
-	['i-bem__dom', 'jquery', 'player', 'tick'],
-	function (provide, BEMDOM, $, Player, tick) {
-		var progressbarBlock, playerControlsBlock;
-		provide(BEMDOM.decl(this.name, {
-			onSetMod: {
-				'js': {
-					'inited': function () {
+    ['i-bem__dom', 'jquery', 'player', 'tick'],
+    function (provide, BEMDOM, $, Player, tick) {
+        var progressbarBlock, playerControlsBlock;
+        provide(BEMDOM.decl(this.name, {
+            onSetMod: {
+                'js': {
+                    'inited': function () {
 
-						var _self = this,
-							__self = this.__self;
+                        var _self = this,
+                            __self = this.__self;
 
-						playerControlsBlock = this.findBlockOutside('player').findBlockInside('player-controls');
-						progressbarBlock = this.findBlockOutside('player').findBlockInside('progressbar');
+                        playerControlsBlock = this.findBlockOutside('player').findBlockInside('player-controls');
+                        progressbarBlock = this.findBlockOutside('player').findBlockInside('progressbar');
 
-						Player.on('ready', __self.initAudioApi, this.__self);
+                        Player.on('ready', __self.initAudioApi, this.__self);
 
-						this.domElem.click(function () {
-							var fileElm = $(this),
-								name = fileElm.data('name'),
-								buffer = __self.getSourceBufferByName(name);
+                        this.domElem.click(function () {
+                            var fileElm = $(this),
+                                name = fileElm.data('name'),
+                                buffer = __self.getSourceBufferByName(name);
 
-							__self.stop();
+                            __self.stop();
 
-							__self._name = name;
-							__self.setSource(buffer);
+                            __self._name = name;
+                            __self.setSource(buffer);
 
-							_self.domElem.removeClass('player__file_active');
-							fileElm.addClass('player__file_active');
+                            _self.domElem.removeClass('player__file_active');
+                            fileElm.addClass('player__file_active');
 
-							playerControlsBlock.setTrackInfo({
-								name: name,
-								timing: '-' + __self.getDurationMin(buffer.duration)
-							});
+                            playerControlsBlock.setTrackInfo({
+                                name: name,
+                                timing: '-' + __self.getDurationMin(buffer.duration)
+                            });
 
-							__self.play();
-							playerControlsBlock.setButtonMod('visible', true);
-							playerControlsBlock.setButtonMod('state', 'play');
-						});
-					}
-				}
-			}
-		},{
-			padDigits: function (number, digits) {
-				return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
-			},
-			getDurationMin: function (duration) {
-				return [Math.floor(duration / 60), this.padDigits(Math.round(duration % 60), 2)].join(':');
-			},
-			getSourceBufferByName: function (name) {
-				var buffer = Player.getBufferByName(name);
-				if (!buffer) {
-					return console.warn("Couldn't find file audio buffer by its name.");
-				}
-				if (Object.prototype.toString.apply(buffer).indexOf('AudioBuffer') < 0) {
-					return console.warn("Found buffer value is not of type 'AudioBuffer': ", buffer);
-				}
-				return buffer;
-			},
-			initAudioApi: function () {
-				this._context = Player.getContext();
-				this._source = this._source || this._context.createBufferSource();
-			},
-			setSource: function (buffer) {
-				this._context = Player.updateContext();
-				this._source = this._context.createBufferSource();
-				this._analyserNode = this._context.createAnalyser();
+                            __self.play();
 
-				this._source.buffer = buffer;
-				this._source.connect(this._analyserNode);
-				this._source.connect(this._context.destination);
-				return this._source;
-			},
-			play: function (startTime) {
-				if (!this._context || this._isPlaying) { return; }
-				this._isPlaying = true;
-				this._currentTime = startTime || 0;
-				this._source.start(this._currentTime);
-				this._startTick();
-			},
-			stop: function () {
-				if (!this._context || !this._isPlaying) { return; }
-				this._isPlaying = false;
-				this._source.stop();
-				this._stopTick();
-			},
-			suspend: function () {
-				if (!this._context || !this._isPlaying) { return; }
-				if (typeof this._context.suspend == 'function') {
-					this._context.suspend();
-				} else {
-					this._source.stop();
-				}
-				this._isPlaying = false;
-				this._stopTick();
-			},
-			resume: function () {
-				if (!this._context || this._isPlaying) { return; }
-				if (typeof this._context.resume == 'function') {
-					this._context.resume();
-				} else {
-					this.setSource(this._source.buffer);
-					this.play(this._currentTime);
-				}
-				this._isPlaying = true;
-				this._startTick();
-			},
-			_startTick: function () {
-				var __self = this;
-				tick.on('tick', function (e) {
-					__self._onTick.call(__self, e);
-				}).start()
-			},
-			_stopTick: function () {
-				tick.stop();
-			},
-			_onTick: function () {
-				if (!this._context) { return; }
-				this._currentTime = this._context.currentTime;
-				if (progressbarBlock) {
-					progressbarBlock.setVal(this._context.currentTime / this._source.buffer.duration * 100);
-				}
-				if (playerControlsBlock) {
-					var __self = this;
-					playerControlsBlock.setTrackInfo({
-						name: this._name,
-						timing: '-' + __self.getDurationMin(this._source.buffer.duration - this._context.currentTime)
-					});
-				}
-				if (this._source.buffer.duration - this._context.currentTime == 0) {
-					var nextTrack = $('.player__file_active').next();
-					if (!nextTrack.length) {
-						this._stopTick();
-					} else {
-						nextTrack.click();
-					}
-				}
+                            playerControlsBlock.setButtonMod('visible', true);
+                            playerControlsBlock.setButtonMod('state', 'play');
+                        });
+                    }
+                }
+            }
+        }, {
+            padDigits: function (number, digits) {
+                return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
+            },
+            getDurationMin: function (duration) {
+                return [Math.floor(duration / 60), this.padDigits(Math.round(duration % 60), 2)].join(':');
+            },
+            getSourceBufferByName: function (name) {
+                var buffer = Player.getBufferByName(name);
 
-				this._draw.call(this);
-			},
-			_draw: function () {
-				var canvas, context, width, height, barWidth, barHeight, barSpacing, frequencyData, barCount, loopStep, i, hue;
+                if (!buffer) {
+                    return console.warn("Couldn't find file audio buffer by its name.");
+                }
 
-				canvas = $('.player__visualization-canvas')[0];
-				context = canvas.getContext('2d');
-				width = canvas.width;
-				height = canvas.height;
-				barWidth = 5;
-				barSpacing = 1;
+                if (Object.prototype.toString.apply(buffer).indexOf('AudioBuffer') < 0) {
+                    return console.warn("Found buffer value is not of type 'AudioBuffer': ", buffer);
+                }
 
-				context.clearRect(0, 0, width, height);
-				frequencyData = new Uint8Array(this._analyserNode.frequencyBinCount);
-				this._analyserNode.getByteFrequencyData(frequencyData);
-				barCount = Math.round(width / (barWidth + barSpacing));
-				loopStep = Math.floor(frequencyData.length / barCount);
+                return buffer;
+            },
+            initAudioApi: function () {
+                this._context = Player.getContext();
+                this._source = this._source || this._context.createBufferSource();
+            },
+            setSource: function (buffer) {
+                this._context = Player.updateContext();
+                this._source = this._context.createBufferSource();
+                this._analyserNode = this._context.createAnalyser();
 
-				for (i = 0; i < barCount; i++) {
-					barHeight = frequencyData[i * loopStep];
-					hue = parseInt(120 * (1 - (barHeight / 255)), 10);
-					context.fillStyle = 'hsl(' + hue + ',75%,50%)';
-					context.fillRect(((barWidth + barSpacing) * i) + (barSpacing / 2), height, barWidth - barSpacing, -barHeight);
-				}
-			}
-		}));
-	}
+                this._source.buffer = buffer;
+                this._source.connect(this._analyserNode);
+                this._source.connect(this._context.destination);
+                return this._source;
+            },
+            play: function (startTime) {
+                if (!this._context || this._isPlaying) {
+                    return;
+                }
+
+                this._isPlaying = true;
+                this._currentTime = startTime || 0;
+                this._source.start(this._currentTime);
+                this._startTick();
+            },
+            stop: function () {
+                if (!this._context || !this._isPlaying) {
+                    return;
+                }
+
+                this._isPlaying = false;
+                this._source.stop();
+                this._stopTick();
+            },
+            suspend: function () {
+                if (!this._context || !this._isPlaying) {
+                    return;
+                }
+
+                if (typeof this._context.suspend == 'function') {
+                    this._context.suspend();
+                } else {
+                    this._source.stop();
+                }
+
+                this._isPlaying = false;
+                this._stopTick();
+            },
+            resume: function () {
+                if (!this._context || this._isPlaying) {
+                    return;
+                }
+
+                if (typeof this._context.resume == 'function') {
+                    this._context.resume();
+                } else {
+                    this.setSource(this._source.buffer);
+                    this.play(this._currentTime);
+                }
+
+                this._isPlaying = true;
+                this._startTick();
+            },
+            _startTick: function () {
+                var __self = this;
+
+                tick.on('tick', function (e) {
+                    __self._onTick.call(__self, e);
+                }).start()
+            },
+            _stopTick: function () {
+                tick.stop();
+            },
+            _onTick: function () {
+                if (!this._context) {
+                    return;
+                }
+
+                this._currentTime = this._context.currentTime;
+
+                if (progressbarBlock) {
+                    progressbarBlock.setVal(this._context.currentTime / this._source.buffer.duration * 100);
+                }
+
+                if (playerControlsBlock) {
+                    var __self = this;
+                    playerControlsBlock.setTrackInfo({
+                        name: this._name,
+                        timing: '-' + __self.getDurationMin(this._source.buffer.duration - this._context.currentTime)
+                    });
+                }
+
+                if (this._source.buffer.duration - this._context.currentTime <= 50) {
+                    var nextTrack = $('.player__file_active').next();
+                    if (!nextTrack.length) {
+                        this._stopTick();
+                    } else {
+                        nextTrack.click();
+                    }
+                }
+
+                this._draw.call(this);
+            },
+            _draw: function () {
+                var canvas, context, width, height,
+                    barWidth, barHeight, barSpacing,
+                    frequencyData, barCount, loopStep,
+                    i, hue;
+
+                canvas = $('.player__visualization-canvas')[0];
+                context = canvas.getContext('2d');
+                width = canvas.width;
+                height = canvas.height;
+                barWidth = 5;
+                barSpacing = 1;
+
+                context.clearRect(0, 0, width, height);
+
+                frequencyData = new Uint8Array(this._analyserNode.frequencyBinCount);
+                this._analyserNode.getByteFrequencyData(frequencyData);
+
+                barCount = Math.round(width / (barWidth + barSpacing));
+                loopStep = Math.floor(frequencyData.length / barCount);
+
+                for (i = 0; i < barCount; i++) {
+                    barHeight = frequencyData[i * loopStep];
+
+                    hue = parseInt(120 * (1 - (barHeight / 255)), 10);
+
+                    context.fillStyle = 'hsl(' + hue + ',75%,50%)';
+                    context.fillRect(
+                        ((barWidth + barSpacing) * i) + (barSpacing / 2),
+                        height,
+                        barWidth - barSpacing,
+                        -barHeight
+                    );
+                }
+            }
+        }));
+    }
 );
+
 /* end: ../../common.blocks/player/__file/player__file.js */
 /* begin: ../../libs/bem-components/common.blocks/progressbar/progressbar.js */
 /**
@@ -9525,232 +9603,275 @@ provide(BEMDOM.decl(/** @lends BEMDOM.prototype */{
 /* end: ../../libs/bem-core/common.blocks/i-bem/__dom/_elem-instances/i-bem__dom_elem-instances.js */
 /* begin: ../../common.blocks/player/__files-list/player__files-list.js */
 modules.define('player__files-list',
-	['i-bem__dom', 'bh', 'player', 'player__file'],
-	function (provide, BEMDOM, BH, Player, playerFile) {
-		provide(BEMDOM.decl(this.name, {
-			onSetMod: {
-				'js': {
-					'inited': function () {
-						Player.on('loading', this._onListLoading, this);
-						Player.on('ready', this._updateFilesList, this);
-					}
-				}
-			},
-			_onListLoading: function () {
-				this.findBlockInside('spin').setMod('visible', true);
-				this.setMod('loading', true);
-			},
-			_onListLoaded: function () {
-				this.findBlockInside('spin').setMod('visible', false);
-				this.setMod('loading', false);
-			},
-			_updateFilesList: function (e) {
-				this._onListLoaded();
+    ['i-bem__dom', 'bh', 'player', 'player__file'],
+    function (provide, BEMDOM, BH, Player, playerFile) {
+        provide(BEMDOM.decl(this.name, {
+            onSetMod: {
+                'js': {
+                    'inited': function () {
+                        Player.on('loading', this._onListLoading, this);
+                        Player.on('ready', this._updateFilesList, this);
+                    }
+                }
+            },
+            _onListLoading: function () {
+                this.findBlockInside('spin').setMod('visible', true);
+                this.setMod('loading', true);
+            },
+            _onListLoaded: function () {
+                this.findBlockInside('spin').setMod('visible', false);
+                this.setMod('loading', false);
+            },
+            _updateFilesList: function (e) {
+                this._onListLoaded();
 
-				var buffers = e.target.__self.getBuffers(),
-					trackInfo = [],
-					info,
-					bufferValue;
+                var buffers = e.target.__self.getBuffers(),
+                    trackInfo = [],
+                    info,
+                    bufferValue;
 
-				for (var name in buffers) {
-					if (buffers[name].isFulfilled()) {
-						info = {};
-						bufferValue = buffers[name].valueOf();
-						info.name = name;
-						info.duration = playerFile.getDurationMin(bufferValue.duration);
-						trackInfo.push(info);
-					}
-				}
+                for (var name in buffers) {
+                    if (buffers[name].isFulfilled()) {
+                        info = {};
 
-				BEMDOM.replace(this.domElem,
-					BH.apply({
-						block: 'player',
-						elem: 'files-list',
-						content: trackInfo.map(function (info) {
-							return {
-								block: 'player',
-								elem: 'file',
-								mix: [{ block: 'i-bem' }],
-								js: {
-									info: info,
-									id: 'file'
-								}
-							};
-						})
-					})
-				);
-			}
-		}));
-	}
+                        bufferValue = buffers[name].valueOf();
+
+                        info.name = name;
+                        info.duration = playerFile.getDurationMin(bufferValue.duration);
+
+                        trackInfo.push(info);
+                    }
+                }
+
+                BEMDOM.replace(this.domElem,
+                    BH.apply({
+                        block: 'player',
+                        elem: 'files-list',
+                        content: trackInfo.map(function (info) {
+                            return {
+                                block: 'player',
+                                elem: 'file',
+                                mix: [{block: 'i-bem'}],
+                                js: {
+                                    info: info,
+                                    id: 'file'
+                                }
+                            };
+                        })
+                    })
+                );
+            }
+        }));
+    }
 );
+
 /* end: ../../common.blocks/player/__files-list/player__files-list.js */
 /* begin: ../../common.blocks/player-controls/player-controls.js */
 modules.define('player-controls',
-	['i-bem__dom', 'bh'],
-	function (provide, BEMDOM, BH) {
-		provide(BEMDOM.decl(this.name, {
-			setTrackInfo: function (info) {
-				BEMDOM.replace(this.findElem('track'),
-					BH.apply({
-						block: 'player-controls',
-						elem: 'track',
-						info: info
-					})
-				);
-			},
-			setButtonMod: function (modName, modVal) {
-				this.elemInstance('btn').setMod(modName, modVal);
-			}
-		}));
-	}
+    ['i-bem__dom', 'bh'],
+    function (provide, BEMDOM, BH) {
+        provide(BEMDOM.decl(this.name, {
+            setTrackInfo: function (info) {
+                BEMDOM.replace(this.findElem('track'),
+                    BH.apply({
+                        block: 'player-controls',
+                        elem: 'track',
+                        info: info
+                    })
+                );
+            },
+            setButtonMod: function (modName, modVal) {
+                this.elemInstance('btn').setMod(modName, modVal);
+            }
+        }));
+    }
 );
+
 /* end: ../../common.blocks/player-controls/player-controls.js */
 /* begin: ../../common.blocks/player/player.js */
 modules.define('player',
-	['i-bem__dom', 'vow'],
-	function (provide, BEMDOM, vow) {
-		provide(BEMDOM.decl(this.name, {
-			onSetMod: {
-				'js': {
-					'inited': function () {
-						var playerControls = this.findBlockInside('player-controls'),
-							fileButton = playerControls.findBlockInside({ block: 'button', mods: { file: true } });
-						fileButton.on('change', this._onChangeFiles, this);
-						this.findBlockOn('dropbox').on('drop', this._onChangeFiles, this);
-					}
-				}
-			},
-			_onChangeFiles: function (e) {
-				var _self = this;
-				this.__self.processFiles.call(this.__self, e).done(function () {
-					_self.emit('ready');
-					_self.setMod('state', '');
-				});
-				this.emit('loading');
-			}
-		}, {
-			_audio: {
-				extensions: ['mp3'],
-				mimeTypes: ['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio']
-			},
-			createContext: function () {
-				try {	this._context = new (window.AudioContext || window.webkitAudioContext)(); }
-				catch (e) {	console.error('Web Audio API is not supported in this browser'); }
-				return this._context;
-			},
-			getContext: function () {
-				if (this._context) { return this._context;}
-				return this.createContext();
-			},
-			closeContext: function () {
-				if (typeof this._context.close !== 'function') { return; }
-				this._context.close();
-			},
-			updateContext: function () {
-				this.closeContext();
-				return this.createContext();
-			},
-			getBuffers: function () {
-				return this._buffers;
-			},
-			getBufferByName: function (name) {
-				if (!name || !this._buffers || !this._buffers[name]) {
-					return console.warn("No name provided or player doesn't have buffer for this file name: ", name);
-				}
+    ['i-bem__dom', 'vow'],
+    function (provide, BEMDOM, vow) {
+        provide(BEMDOM.decl(this.name, {
+            onSetMod: {
+                'js': {
+                    'inited': function () {
+                        var playerControls = this.findBlockInside('player-controls'),
+                            fileButton = playerControls.findBlockInside({
+                                block: 'button',
+                                mods: {file: true}
+                            });
 
-				var buffer = this._buffers[name];
+                        fileButton.on('change', this._onChangeFiles, this);
 
-				if (this._buffers[name].isResolved()) { return buffer.valueOf(); }
+                        this.findBlockOn('dropbox').on('drop', this._onChangeFiles, this);
+                    }
+                }
+            },
+            _onChangeFiles: function (e) {
+                var _self = this;
 
-				return false;
-			},
-			processFiles: function (e, /**Array*/ files) {
-				var files = files || e.target.getFiles(),
-					deferred = vow.defer(),
-					i;
+                this.__self.processFiles
+                    .call(this.__self, e)
+                    .done(function () {
+                        _self.emit('ready');
+                        _self.setMod('state', '');
+                    });
 
-				this._buffers = this._buffers || {};
+                this.emit('loading');
+            }
+        }, {
+            _audio: {
+                extensions: ['mp3'],
+                mimeTypes: [
+                    'audio/mpeg',
+                    'audio/x-mpeg',
+                    'audio/mp3',
+                    'audio/x-mp3',
+                    'audio/mpeg3',
+                    'audio/x-mpeg3',
+                    'audio/mpg',
+                    'audio/x-mpg',
+                    'audio/x-mpegaudio'
+                ]
+            },
+            createContext: function () {
+                try {
+                    this._context = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                catch (e) { console.error('Web Audio API is not supported in this browser'); }
+                return this._context;
+            },
+            getContext: function () {
+                if (this._context) {
+                    return this._context;
+                }
 
-				if (files == null) {
-					console.warn("No files to process!");
-				}
+                return this.createContext();
+            },
+            closeContext: function () {
+                if (typeof this._context.close !== 'function') {
+                    return;
+                }
 
-				if (Object.prototype.toString.apply(files).indexOf('Array') < 0 &&
-					Object.prototype.toString.apply(files).indexOf('FileList') < 0) {
-					files = [files];
-				}
+                this._context.close();
+            },
+            updateContext: function () {
+                this.closeContext();
+                return this.createContext();
+            },
+            getBuffers: function () {
+                return this._buffers;
+            },
+            getBufferByName: function (name) {
+                if (!name || !this._buffers || !this._buffers[name]) {
+                    return console.warn("No name provided or player doesn't have buffer for this file name: ", name);
+                }
 
+                var buffer = this._buffers[name];
 
-				for (i = 0; i < files.length; i++) {
-					this._buffers[files[i].name] = this.getRawAudio(files[i]).then(this.getAudioBuffer, null, null, this);
-				}
+                if (this._buffers[name].isResolved()) {
+                    return buffer.valueOf();
+                }
 
-				vow.allResolved(this._buffers).done(function(buffers) {
-					deferred.resolve(buffers);
-				}, function (errors) {
-					deferred.reject(errors);
-				}, null);
+                return false;
+            },
+            processFiles: function (e, /**Array*/ files) {
+                var files = files || e.target.getFiles(),
+                    deferred = vow.defer(),
+                    i;
 
-				return deferred.promise();
-			},
-			/**
-			 *
-			 * @param {File|Blob} file File to process.
-			 * @returns {vow.Promise}
-			 */
-			getRawAudio: function (file) {
-				var deferred = vow.defer(),
-					reader = new FileReader(),
-					msg;
-				if (file == null) {
-					msg = 'Please provide a file!';
-					console.warn(msg);
-					deferred.reject(msg);
-					return deferred.promise();
-				}
-				if (this._audio.mimeTypes.indexOf(file.type) < 0) {
-					msg = 'Unsupported file was provided!';
-					console.warn(msg);
-					deferred.reject(msg);
-					return deferred.promise();
-				}
+                this._buffers = this._buffers || {};
 
-				reader.onload = function (e) {
-					deferred.resolve(e.target.result);
-				};
+                if (files == null) {
+                    console.warn("No files to process!");
+                }
 
-				reader.onerror = function (e) {
-					deferred.reject(e.target.error);
-				};
+                if (Object.prototype.toString.apply(files).indexOf('Array') < 0 &&
+                    Object.prototype.toString.apply(files).indexOf('FileList') < 0) {
+                    files = [files];
+                }
 
-				reader.readAsArrayBuffer(file);
+                for (i = 0; i < files.length; i++) {
+                    this._buffers[files[i].name] = this.getRawAudio(files[i])
+                        .then(this.getAudioBuffer, null, null, this);
+                }
 
-				return deferred.promise();
-			},
-			getAudioBuffer: function (raw) {
-				var deferred = vow.defer(),
-					msg;
-				if (raw == null) {
-					msg = 'Please provide a raw file data!';
-					console.warn(msg);
-					deferred.reject(msg);
-					return deferred.promise();
-				}
-				if (Object.prototype.toString.apply(raw).indexOf('ArrayBuffer') < 0) {
-					msg = 'You should provide an instance of ArrayBuffer type!';
-					console.warn(msg);
-					deferred.reject(msg);
-					return deferred.promise();
-				}
+                vow.allResolved(this._buffers)
+                    .done(function (buffers) {
+                        deferred.resolve(buffers);
+                    }, function (errors) {
+                        deferred.reject(errors);
+                    }, null);
 
-				this.getContext().decodeAudioData(raw, function (buffer) {
-					if (!buffer) { return deferred.reject("Failed to decode. Buffer is null.");	}
-					deferred.resolve(buffer);
-				});
+                return deferred.promise();
+            },
+            /**
+             *
+             * @param {File|Blob} file File to process.
+             * @returns {vow.Promise}
+             */
+            getRawAudio: function (file) {
+                var deferred = vow.defer(),
+                    reader = new FileReader(),
+                    msg;
 
-				return deferred.promise();
-			}
-		}));
-	}
+                if (file == null) {
+                    msg = 'Please provide a file!';
+                    console.warn(msg);
+                    deferred.reject(msg);
+                    return deferred.promise();
+                }
+
+                if (this._audio.mimeTypes.indexOf(file.type) < 0) {
+                    msg = 'Unsupported file was provided!';
+                    console.warn(msg);
+                    deferred.reject(msg);
+                    return deferred.promise();
+                }
+
+                reader.onload = function (e) {
+                    deferred.resolve(e.target.result);
+                };
+
+                reader.onerror = function (e) {
+                    deferred.reject(e.target.error);
+                };
+
+                reader.readAsArrayBuffer(file);
+
+                return deferred.promise();
+            },
+            getAudioBuffer: function (raw) {
+                var deferred = vow.defer(),
+                    msg;
+
+                if (raw == null) {
+                    msg = 'Please provide a raw file data!';
+                    console.warn(msg);
+                    deferred.reject(msg);
+                    return deferred.promise();
+                }
+
+                if (Object.prototype.toString.apply(raw).indexOf('ArrayBuffer') < 0) {
+                    msg = 'You should provide an instance of ArrayBuffer type!';
+                    console.warn(msg);
+                    deferred.reject(msg);
+                    return deferred.promise();
+                }
+
+                this.getContext().decodeAudioData(raw, function (buffer) {
+                    if (!buffer) {
+                        return deferred.reject("Failed to decode. Buffer is null.");
+                    }
+
+                    deferred.resolve(buffer);
+                });
+
+                return deferred.promise();
+            }
+        }));
+    }
 );
+
 /* end: ../../common.blocks/player/player.js */
