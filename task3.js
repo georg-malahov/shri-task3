@@ -8988,7 +8988,7 @@ modules.define('player__file',
                     });
                 }
 
-                if (this._source.buffer.duration - this._context.currentTime <= 50) {
+                if (this._source.buffer.duration - this._context.currentTime <= 0.050) {
                     var nextTrack = $('.player__file_active').next();
                     if (!nextTrack.length) {
                         this._stopTick();
